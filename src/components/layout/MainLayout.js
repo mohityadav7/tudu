@@ -20,21 +20,28 @@ import 'ant-design-pro/dist/ant-design-pro.min.css';
 const { Sider, Content } = Layout;
 
 class MainLayout extends Component {
-	state = { visible: false, placement: 'left' };
-
+    state = { visible: false, placement: 'left' };
+    
     showDrawer = () => {
         this.setState({
             visible: true,
         });
     };
 
+    hideDrawer = () => {
+        this.setState({
+            visible: false,
+        });
+    }
+    
     onClose = () => {
         this.setState({
             visible: false,
         });
     };
-
+    
 	render() {
+        const match = this.props.match;
 		return (
 			<Layout>
 				{/* Sider - for desktop site */}
@@ -49,7 +56,7 @@ class MainLayout extends Component {
 				>
 					<div>
 						<SidebarProfileCard />
-						<SidebarMenu />
+						<SidebarMenu match={match} />
 					</div>
 				</Sider> {/* Sider -for desktop site */}
 				
@@ -61,23 +68,22 @@ class MainLayout extends Component {
 					onClose={this.onClose}
 					visible={this.state.visible}
 				>
-					<SidebarMenu />
+					<SidebarMenu hideDrawer={this.hideDrawer} />
 				</Drawer> {/* /Drawer - for mobile site */}
 
 				<Layout>
 					<LayoutHeader showDrawer={this.showDrawer} /> {/* header for mobile site */}
 					
 					<Content>
-						<BrowserRouter>
+						{/* <BrowserRouter> */}
 							<div className="App">
-								<Switch>
-									<Route exact path='/' component={DashboardContent} />
-									<Route path='/course/:id' component={CourseDetails} />
-									<Route path='/courses' component={CoursesList} />
-									<Route path='/settings' component={SettingsContent} />
-								</Switch>
+                                <Route exact path={`/dashboard`} component={DashboardContent} />
+                                <Route path='/dashboard/course/:id' component={CourseDetails} />
+                                <Route path={`/dashboard/courses`} component={CoursesList} />
+                                <Route path={`/dashboard/settings`} component={SettingsContent} />
+                                <Route render={() => <div>Not found on dashboard.</div>} />
 							</div>
-						</BrowserRouter>
+						{/* </BrowserRouter> */}
 					</Content>
 
 					<LayoutFooter />
