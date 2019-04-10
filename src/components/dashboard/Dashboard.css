@@ -1,0 +1,52 @@
+/* 
+* for breakpoints
+* can't be used in media queries
+*/
+/* :root{
+    --xs: 480px;
+    --sm: 576px;
+    --md: 768px;
+    --lg: 992px;
+    --xl: 1200px;
+    --xxl: 1600;
+} */    
+
+@media screen and (min-width: 768px){
+    /* hide header on medium sized screens */
+    #navMenu{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .ant-layout-content{
+        /* border-top: 2px solid #1890ff; */
+        margin-top: 64px;
+    }
+}
+.ant-layout-header{
+    box-shadow: 0 0 5px #eee;
+}
+
+/* hide sider icon */
+.ant-layout-sider-zero-width-trigger{
+    display: none;
+}
+
+/* remove drawer padding */
+.ant-drawer-body{
+    padding: 0;
+}
+
+/* remove bottom border from drawer icon */
+.ant-menu-item-selected {
+    border-bottom: none !important; /* override ant design styling */
+}
+
+.ant-menu-inline {
+    border-right: none;
+}
+
+.ant-layout-sider-light {
+    border-right: 1px solid #e8e8e8;
+}
