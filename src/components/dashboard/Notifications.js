@@ -1,6 +1,5 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import NotificationMenu from './NotificationMenu';
 import { Card, List } from 'antd';
 
 const notifications = [
@@ -13,7 +12,6 @@ const notifications = [
 const Notifications = () => {
     return (
         <div style={{ 'margin': '24px', 'boxSizing': 'border-box' }}>
-            <NotificationMenu />
             <Card
               size="small"
               title="Notifications"
