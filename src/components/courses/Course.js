@@ -3,7 +3,7 @@ import { Card } from 'antd';
 
 const Course = () => {
     return (
-        < Card 
+        <Card 
             size="small"
             title="Course Title"
             style={{ width: '100%', margin: '12px 0' }}
@@ -18,7 +18,7 @@ const Course = () => {
                     <p className="grey-text">5th April, 2019</p>
                 </div>
             </div> */}
-        </ Card>
+        </Card>
     )
 }
 

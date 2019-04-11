@@ -1,0 +1,50 @@
+.loginFormContainer,
+.registerFormContainer {
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.ant-input{
+    /* used important bcoz of chrome autofill changes the border */
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+/* remove blue box shadow from input */
+.ant-input:focus {
+    box-shadow: none;
+}
+/* remove box shadow for wrong input */
+.has-error .ant-input-affix-wrapper .ant-input:focus{
+    box-shadow: none;
+}
+.ant-input:active{
+    outline: none !important;
+}
+.student-login-form,
+.teacher-login-form,
+.student-register-form,
+.teacher-register-form {
+    max-width: 100%;
+}
+.login-form-forgot {
+    float: right;
+}
+.login-form-button,
+.register-form-button {
+    width: 100%;
+}
+.custom-padding-left > input.ant-input {
+    padding-left: 42px !important;
+}
+
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

@@ -1,28 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Menu, Icon } from "antd";
 
 export default function SidebarMenu({ match, hideDrawer }) {
-
-	// const handleClick = ({ item, key, keyPath }) => {
-	// 	// console.log(item);
-	// 	console.log(typeof key);
-	// 	// console.log(keyPath);
-	// 	if (key === "1") {
-	// 		console.log("home");
-	// 		window.location.pathname = "/";
-	// 	} else if (key === "2") {
-	// 		console.log("courses");
-	// 		window.location.pathname = "/courses";
-	// 	} else if (key === "3") {
-	// 		console.log("settins");
-	// 		window.location.pathname = "/settings";
-	// 	} else if (key === "4") {
-	// 		console.log("logout");
-	// 		window.location.pathname = "/logout";
-	// 	}
-	// };
-
 	return (
 		<Menu
 			theme="light"
@@ -49,8 +29,9 @@ export default function SidebarMenu({ match, hideDrawer }) {
 				</NavLink>
 			</Menu.Item>
 			<Menu.Item key="4">
-				<Icon type="user" />
-				<span className="nav-text">Log Out</span>
+				<Link to="/auth/login">
+					<Icon type="user" />
+					<span className="nav-text">Log Out</span></Link>
 			</Menu.Item>
 		</Menu>
 	);

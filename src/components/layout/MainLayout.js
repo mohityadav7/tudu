@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./MainLayout.css";
 
 // import Navbar from "../layout/Navbar";
@@ -13,7 +13,7 @@ import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import SidebarProfileCard from './SidebarProfileCard';
 
-import { Drawer, Layout } from 'antd';
+import { Drawer, Layout, Switch } from 'antd';
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.min.css';
 
@@ -77,11 +77,10 @@ class MainLayout extends Component {
 					<Content>
 						{/* <BrowserRouter> */}
 							<div className="App">
-                                <Route exact path={`/dashboard`} component={DashboardContent} />
-                                <Route path='/dashboard/course/:id' component={CourseDetails} />
-                                <Route path={`/dashboard/courses`} component={CoursesList} />
-                                <Route path={`/dashboard/settings`} component={SettingsContent} />
-                                <Route render={() => <div>Not found on dashboard.</div>} />
+								<Route exact path={`/dashboard`} component={DashboardContent} />
+								<Route path='/dashboard/course/:id' component={CourseDetails} />
+								<Route path={`/dashboard/courses`} component={CoursesList} />
+								<Route path={`/dashboard/settings`} component={SettingsContent} />
 							</div>
 						{/* </BrowserRouter> */}
 					</Content>
