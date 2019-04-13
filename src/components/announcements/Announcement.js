@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 
-const Course = ({announcement}) => {
+const Announcement = ({announcement}) => {
     return (
         <Card 
             size="small"
@@ -15,4 +15,4 @@ const Course = ({announcement}) => {
     )
 }
 
-export default Course;
+export default Announcement;

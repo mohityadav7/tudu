@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import { connect } from 'react-redux';
 import "./MainLayout.css";
+import { withRouter } from 'react-router-dom';
 
 // import Navbar from "../layout/Navbar";
 import CourseDetails from "../courses/CourseDetails";
@@ -13,9 +15,10 @@ import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import SidebarProfileCard from './SidebarProfileCard';
 
-import { Drawer, Layout, Switch } from 'antd';
+import { Drawer, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.min.css';
+import NewAnnouncement from "../announcements/NewAnnouncement";
 
 const { Sider, Content } = Layout;
 
@@ -51,7 +54,7 @@ class MainLayout extends Component {
 					collapsedWidth="0"
 					onBreakpoint={(broken) => { console.log(broken); }}
 					onCollapse={(collapsed, type) => {
-							console.log(collapsed, type);
+						console.log(collapsed, type);
 					}}
 				>
 					<div>
@@ -75,14 +78,13 @@ class MainLayout extends Component {
 					<LayoutHeader showDrawer={this.showDrawer} /> {/* header for mobile site */}
 					
 					<Content>
-						{/* <BrowserRouter> */}
-							<div className="App">
-								<Route exact path={`/dashboard`} component={DashboardContent} />
-								<Route path='/dashboard/course/:id' component={CourseDetails} />
-								<Route path={`/dashboard/courses`} component={CoursesList} />
-								<Route path={`/dashboard/settings`} component={SettingsContent} />
-							</div>
-						{/* </BrowserRouter> */}
+						<div className="App" style={{ padding: '24px' }}>
+							<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} />} />
+							<Route exact path='/dashboard/course/:id' component={CourseDetails} />
+							<Route path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
+							<Route exact path='/dashboard/settings' component={SettingsContent} />
+							<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
+						</div>
 					</Content>
 
 					<LayoutFooter />
@@ -92,4 +94,10 @@ class MainLayout extends Component {
 	}
 }
 
-export default MainLayout;
+const mapStateToProps = (state) => {
+	return{
+		announcements: state.announcement.announcements
+	}
+}
+
+export default withRouter(connect(mapStateToProps)(MainLayout));

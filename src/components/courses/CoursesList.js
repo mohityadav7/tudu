@@ -1,12 +1,17 @@
 import React from 'react'
 import Course from './Course'
 
-const CoursesList = () => {
+const CoursesList = (props) => {
+
+    const { announcements } = props;
+
     return (
         <div className="courses-list section">
-            <Course />
-            <Course />
-            <Course />
+            { announcements && announcements.map(announcement => {
+                return (
+                    <Course announcement={announcement} key={announcement.id} />
+                )
+            })}
         </div>
     );
 }
