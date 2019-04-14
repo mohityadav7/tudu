@@ -19,6 +19,7 @@ import { Drawer, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.min.css';
 import NewAnnouncement from "../announcements/NewAnnouncement";
+import Announcement from "../announcements/Announcement";
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
@@ -43,7 +44,7 @@ class MainLayout extends Component {
         this.setState({
             visible: false,
         });
-    };
+	};
     
 	render() {
         const match = this.props.match;
@@ -86,6 +87,7 @@ class MainLayout extends Component {
 							<Route path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
 							<Route exact path='/dashboard/settings' component={SettingsContent} />
 							<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
+							<Route exact path='/dashboard/announcement/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
 						</div>
 					</Content>
 

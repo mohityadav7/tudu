@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Icon } from 'antd'
-import Announcement from './Announcement'
+import AnnouncementSummary from './AnnouncementSummary'
 
 const AnnouncementList = (props) => {
 
@@ -14,7 +14,9 @@ const AnnouncementList = (props) => {
             </Link>
             { announcements && announcements.map(announcement => {
                 return (
-                    <Announcement announcement={announcement} key={announcement.id} />
+                    <Link to={ '/dashboard/announcement/'+announcement.id } key={announcement.id}>
+                        <AnnouncementSummary announcement={announcement} />
+                    </Link>
                 )
             })}
         </div>
