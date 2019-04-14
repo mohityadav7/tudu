@@ -8,7 +8,7 @@ const Announcement = ({announcement}) => {
             title={announcement.title}
             style={{ width: '100%', margin: '12px 0' }}
         >
-            <p>{ announcement.content }</p>
+            <p>{ announcement.description }</p>
             <p className="grey-text">Posted by Mohit <br/>
                 on 5th April, 2019</p>
         </Card>

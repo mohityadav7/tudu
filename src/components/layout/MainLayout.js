@@ -19,6 +19,8 @@ import { Drawer, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.min.css';
 import NewAnnouncement from "../announcements/NewAnnouncement";
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 const { Sider, Content } = Layout;
 
@@ -95,9 +97,13 @@ class MainLayout extends Component {
 }
 
 const mapStateToProps = (state) => {
+	console.log(state)
 	return{
-		announcements: state.announcement.announcements
+		announcements: state.firestore.ordered.announcements
 	}
 }
 
-export default withRouter(connect(mapStateToProps)(MainLayout));
+export default compose(
+	firestoreConnect([{collection: 'announcements'}]),
+	connect(mapStateToProps)
+)(withRouter(MainLayout));
