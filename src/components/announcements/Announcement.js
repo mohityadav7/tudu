@@ -28,13 +28,7 @@ const Announcement = (props) => {
         )
     } else {
         return (
-            <Card 
-                size="small"
-                style={{ width: '100%', margin: '12px 0' }}
-            >   
-                <Icon type="loading" />
-                <p>Loading...</p>
-            </Card>
+            <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }} loading={true}></Card>
         )
     }
 }

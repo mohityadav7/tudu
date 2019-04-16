@@ -18,14 +18,12 @@ const AnnouncementList = (props) => {
                         <AnnouncementSummary announcement={announcement} />
                     </Link>
                 )
-            }): 
-                <Card 
-                    size="small"
-                    style={{ width: '100%', margin: '12px 0' }}
-                >
-                    <Icon type="loading" />
-                    <p>Loading...</p>
-                </Card>
+            }):
+                <div>
+                    <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }} loading={true}></Card>
+                    <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }} loading={true}></Card>
+                    <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }} loading={true}></Card>
+                </div>
              }
         </div>
     );
