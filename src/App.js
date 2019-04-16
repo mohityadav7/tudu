@@ -7,6 +7,7 @@ import Auth from './components/auth/Auth';
 import Homepage from './components/home/Homepage';
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.min.css';
+import Exception from 'ant-design-pro/lib/Exception';
 
 class App extends Component {
 	render() {
@@ -17,7 +18,7 @@ class App extends Component {
 						<Route exact path='/' component={Homepage} />
 						<Route path='/dashboard' component={MainLayout} />
 						<Route path='/auth' component={Auth} />
-						<Route path='/*' component={Homepage} />
+						<Route path='/*' render={() => <Exception type="404" desc="Sorry, the page you visited does not exist." />} />
 					</Switch>
 				</div>
 			</BrowserRouter>

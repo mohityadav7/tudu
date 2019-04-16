@@ -31,6 +31,12 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 authError: action.err.message
             }
+        case 'CODE_SENT_SUCCESS':
+            console.log('verification code sent via SMS');
+            return state;
+        case 'CODE_SENT_ERROR':
+            console.log(action.err.message);
+            return state;
         default:
             return state;
     }

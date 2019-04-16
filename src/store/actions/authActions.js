@@ -43,3 +43,37 @@ export const signUp = (newUser) => {
         })
     }
 }
+
+export const sendVerificationCodeForPhoneSignIn = ({ phone, appVerifier }) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        firebase.auth().signInWithPhoneNumber(phone, appVerifier)
+            .then(confirmationResult => {
+                dispatch({ type: 'CODE_SENT_SUCCESS' });
+                // SMS sent. Prompt user to type the code from the message, then sign the
+                // user in with confirmationResult.confirm(code).
+                window.confirmationResult = confirmationResult;
+            }).catch(
+                (err) => {
+                    dispatch({ type: 'CODE_SENT_ERROR', err })
+                    // Error; SMS not sent
+                }
+            );
+    }
+}
+
+export const verifyVerificationCodeForPhoneSignIn = (code) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        window.confirmationResult.confirm(code).then(function (result) {
+            dispatch({ type: 'LOGIN_SUCCESS' });
+            // User signed in successfully.
+            console.log('User signed in successfully');
+            // var user = result.user;
+            // ...
+        }).catch(function (err) {
+            dispatch({ type: 'LOGIN_ERROR', err });
+            console.log("User couldn't sign in (bad verification code?)");
+            // User couldn't sign in (bad verification code?)
+            // ...
+        });
+    }
+}
