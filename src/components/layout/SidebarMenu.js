@@ -1,15 +1,17 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menu, Icon } from "antd";
+import { connect } from 'react-redux';
+import { signOut } from '../../store/actions/authActions';
 
-export default function SidebarMenu({ match, hideDrawer }) {
+const SidebarMenu = (props) => {
 	return (
 		<Menu
 			theme="light"
 			mode="inline"
 			defaultSelectedKeys={["1"]}
 			style={{ padding: "0 0" }}
-			onClick={hideDrawer}>
+			onClick={props.hideDrawer}>
 			<Menu.Item key="1">
 				<NavLink to={`/dashboard`}>
 					<Icon type="home" />
@@ -29,10 +31,19 @@ export default function SidebarMenu({ match, hideDrawer }) {
 				</NavLink>
 			</Menu.Item>
 			<Menu.Item key="4">
-				<Link to="/auth/login">
+				<span onClick={ props.signOut }>
 					<Icon type="user" />
-					<span className="nav-text">Log Out</span></Link>
+					<span className="nav-text">Log Out</span>
+				</span>
 			</Menu.Item>
 		</Menu>
 	);
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		signOut: () => dispatch(signOut())
+	}
+}
+
+export default connect(null, mapDispatchToProps)(SidebarMenu);

@@ -21,7 +21,14 @@ export class NewAnnouncement extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.createAnnouncement(this.state);
+		this.props.createAnnouncement({
+			...this.state,
+			authorFirstName: this.props.profile.firstName,
+			authorLastName: this.props.profile.lastName,
+			authorId: this.props.auth.uid,
+			createdAt: new Date()
+		});
+		this.props.history.push('/dashboard')
 	}
 
 	render() {
@@ -44,10 +51,17 @@ export class NewAnnouncement extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		auth: state.firebase.auth,
+		profile: state.firebase.profile
+	}
+}
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createAnnouncement: (announcement) => dispatch(createAnnouncement(announcement))
 	}
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(NewAnnouncement));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewAnnouncement));

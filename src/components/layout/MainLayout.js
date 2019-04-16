@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import "./MainLayout.css";
-import { withRouter } from 'react-router-dom';
 
 // import Navbar from "../layout/Navbar";
 import CourseDetails from "../courses/CourseDetails";
-
 import DashboardContent from "../dashboard/DashboardContent";
 import SettingsContent from "../settings/SettingsContent";
 import CoursesList from "../courses/CoursesList";
@@ -14,14 +15,12 @@ import SidebarMenu from './SidebarMenu';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import SidebarProfileCard from './SidebarProfileCard';
+import NewAnnouncement from "../announcements/NewAnnouncement";
+import Announcement from "../announcements/Announcement";
 
 import { Drawer, Layout } from 'antd';
 import 'antd/dist/antd.css';
 import 'ant-design-pro/dist/ant-design-pro.min.css';
-import NewAnnouncement from "../announcements/NewAnnouncement";
-import Announcement from "../announcements/Announcement";
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 
 const { Sider, Content } = Layout;
 
@@ -47,7 +46,13 @@ class MainLayout extends Component {
 	};
     
 	render() {
-        const match = this.props.match;
+		const match = this.props.match;
+		const auth = this.props.auth;
+		
+		if(!auth.uid) {
+			return <Redirect to="/auth/login"></Redirect>
+		}
+
 		return (
 			<Layout>
 				{/* Sider - for desktop site */}
@@ -68,7 +73,7 @@ class MainLayout extends Component {
 				
 				{/*  Drawer - for mobile site */}
 				<Drawer
-					title="Hi, Mohit!"
+					title={`Hi, ${this.props.profile.firstName}!`}
 					placement={this.state.placement}
 					closable={false}
 					onClose={this.onClose}
@@ -101,11 +106,13 @@ class MainLayout extends Component {
 const mapStateToProps = (state) => {
 	console.log(state)
 	return{
-		announcements: state.firestore.ordered.announcements
+		announcements: state.firestore.ordered.announcements,
+		auth: state.firebase.auth,
+		profile: state.firebase.profile
 	}
 }
 
 export default compose(
-	firestoreConnect([{collection: 'announcements'}]),
+	firestoreConnect([{collection: 'announcements', limit: 10, orderBy: ['createdAt', 'desc']}]),
 	connect(mapStateToProps)
 )(withRouter(MainLayout));
