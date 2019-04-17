@@ -11,6 +11,7 @@ class TeacherRegisterForm extends Component {
 		// teacherId: "",
 		email: "",
 		password: "",
+		isTeacher: true
 	};
 
 	updateFirstName = (e) => {
