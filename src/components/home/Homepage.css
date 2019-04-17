@@ -1,0 +1,38 @@
+.homepage {
+    background-color: #e0e0e0;
+    height: 90vh;
+    padding: 12px;
+}
+.homepage .landingImgContainer{
+    height: 85vh;
+    background-image: url('./landing.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.text-content-container{
+    height: 85vh;
+    text-align: left;
+}
+.text-content {
+    position: relative;
+    top: 35%;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 768px) {
+    .homepage .landingImgContainer{
+        height: 50vh;
+        background-image: url('./landing.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .text-content-container{
+        height: auto;
+        text-align: center;
+    }
+    .text-content {
+        position: relative;
+        top: -20%;
+        transform: translateY(0%);
+    }
+}
