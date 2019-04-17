@@ -17,6 +17,7 @@ import LayoutFooter from './LayoutFooter';
 import SidebarProfileCard from './SidebarProfileCard';
 import NewAnnouncement from "../announcements/NewAnnouncement";
 import Announcement from "../announcements/Announcement";
+import Course from "../courses/Course";
 
 import { Drawer, Layout } from 'antd';
 import 'antd/dist/antd.css';
@@ -92,7 +93,8 @@ class MainLayout extends Component {
 							<Route path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
 							<Route exact path='/dashboard/settings' component={SettingsContent} />
 							<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
-							<Route exact path='/dashboard/announcement/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
+							<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
+							<Route exact path='/dashboard/courses/:id' render={() => <Course announcements={this.props.announcements}/>} />
 						</div>
 					</Content>
 

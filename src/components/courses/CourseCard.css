@@ -1,0 +1,15 @@
+.course-card-body{
+    /* background-image: url('https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100px;
+    padding: 24px 8px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+a {
+    color: rgba(0,0,0,0.65) !important;
+    text-decoration: none;
+}

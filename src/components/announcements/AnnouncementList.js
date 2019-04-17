@@ -14,7 +14,7 @@ const AnnouncementList = (props) => {
             </Link>
             { announcements ? announcements.map(announcement => {
                 return (
-                    <Link to={ '/dashboard/announcement/'+announcement.id } key={announcement.id}>
+                    <Link to={ '/dashboard/announcements/'+announcement.id } key={announcement.id}>
                         <AnnouncementSummary announcement={announcement} />
                     </Link>
                 )
