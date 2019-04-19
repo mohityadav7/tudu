@@ -7,7 +7,6 @@ import { firestoreConnect } from 'react-redux-firebase';
 import "./MainLayout.css";
 
 // import Navbar from "../layout/Navbar";
-import CourseDetails from "../courses/CourseDetails";
 import DashboardContent from "../dashboard/DashboardContent";
 import SettingsContent from "../settings/SettingsContent";
 import CoursesList from "../courses/CoursesList";
@@ -91,7 +90,6 @@ class MainLayout extends Component {
 						<div className="App" style={{  }}>
 							<Switch>
 								<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} />} />
-								<Route exact path='/dashboard/course/:id' component={CourseDetails} />
 								<Route exact path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
 								<Route exact path='/dashboard/settings' component={SettingsContent} />
 								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
