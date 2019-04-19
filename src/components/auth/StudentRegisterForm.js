@@ -4,6 +4,8 @@ import { Form, Icon, Input, Button } from "antd";
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
 
+const formName = 'student_register_form';
+
 class StudentRegisterForm extends Component {
     state = {
 		firstName: "",
@@ -11,37 +13,47 @@ class StudentRegisterForm extends Component {
 		// studentId: "",
 		email: "",
 		password: "",
-    };
+		isTeacher: false,
+		program: "BTech",
+		branch: "",
+		semester: 0
+	};
+	
+	handleChange = (e) => {
+		this.setState({
+			[e.target.id.replace(formName+'_', '')]: e.target.value
+		})
+	}
     
-	updateFirstName = (e) => {
-		this.setState({
-			firstName: e.target.value
-		})
-	}
+	// updateFirstName = (e) => {
+	// 	this.setState({
+	// 		firstName: e.target.value
+	// 	})
+	// }
 
-	updateLastName = (e) => {
-		this.setState({
-			lastName: e.target.value
-		})
-	}
+	// updateLastName = (e) => {
+	// 	this.setState({
+	// 		lastName: e.target.value
+	// 	})
+	// }
 
-	updateStudentId = (e) => {
-		this.setState({
-			studentId: e.target.value
-		})
-	}
+	// updateStudentId = (e) => {
+	// 	this.setState({
+	// 		studentId: e.target.value
+	// 	})
+	// }
 
-	updateEmail = (e) => {
-        this.setState({
-            'email': e.target.value            
-        })
-    }
+	// updateEmail = (e) => {
+    //     this.setState({
+    //         'email': e.target.value            
+    //     })
+    // }
 
-    updatePassword = (e) => {
-        this.setState({
-            'password': e.target.value
-        })
-    }
+    // updatePassword = (e) => {
+    //     this.setState({
+    //         'password': e.target.value
+    //     })
+    // }
 
 	handleSubmit = e => {
 		e.preventDefault();
@@ -68,7 +80,7 @@ class StudentRegisterForm extends Component {
 						]
 					})(
 						<Input
-                            onChange={this.updateFirstName}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -90,7 +102,7 @@ class StudentRegisterForm extends Component {
 						]
 					})(
 						<Input
-                            onChange={this.updateLastName}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -112,7 +124,7 @@ class StudentRegisterForm extends Component {
 						]
 					})(
 						<Input
-                            onChange={this.updateStudentId}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -134,7 +146,7 @@ class StudentRegisterForm extends Component {
 						]
 					})(
 						<Input
-                            onChange={this.updateEmail}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -164,7 +176,7 @@ class StudentRegisterForm extends Component {
 						]
 					})(
 						<Input
-                            onChange={this.updatePassword}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -206,7 +218,7 @@ class StudentRegisterForm extends Component {
 	}
 }
 
-export const WrappedStudentRegisterForm = Form.create({ name: "student_register_form" })(
+export const WrappedStudentRegisterForm = Form.create({ name: formName })(
 	StudentRegisterForm
 );
 

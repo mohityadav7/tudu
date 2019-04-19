@@ -4,6 +4,8 @@ import { Form, Icon, Input, Button } from "antd";
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
 
+const formName = 'teacher_register_form';
+
 class TeacherRegisterForm extends Component {
 	state = {
 		firstName: "",
@@ -14,35 +16,41 @@ class TeacherRegisterForm extends Component {
 		isTeacher: true
 	};
 
-	updateFirstName = (e) => {
+	handleChange = (e) => {
 		this.setState({
-			firstName: e.target.value
+			[e.target.id.replace(formName+'_', '')]: e.target.value
 		})
 	}
 
-	updateLastName = (e) => {
-		this.setState({
-			lastName: e.target.value
-		})
-	}
+	// updateFirstName = (e) => {
+	// 	this.setState({
+	// 		firstName: e.target.value
+	// 	})
+	// }
 
-	updateTeacherId = (e) => {
-		this.setState({
-			teacherId: e.target.value
-		})
-	}
+	// updateLastName = (e) => {
+	// 	this.setState({
+	// 		lastName: e.target.value
+	// 	})
+	// }
 
-	updateEmail = (e) => {
-        this.setState({
-            'email': e.target.value            
-        })
-    }
+	// updateTeacherId = (e) => {
+	// 	this.setState({
+	// 		teacherId: e.target.value
+	// 	})
+	// }
 
-    updatePassword = (e) => {
-        this.setState({
-            'password': e.target.value
-        })
-    }
+	// updateEmail = (e) => {
+    //     this.setState({
+    //         'email': e.target.value            
+    //     })
+    // }
+
+    // updatePassword = (e) => {
+    //     this.setState({
+    //         'password': e.target.value
+    //     })
+    // }
 
 	handleSubmit = (e) => {
 		e.preventDefault();
@@ -68,7 +76,7 @@ class TeacherRegisterForm extends Component {
 						]
 					})(
 						<Input
-							onChange={this.updateFirstName}
+							onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -90,7 +98,7 @@ class TeacherRegisterForm extends Component {
 						]
 					})(
 						<Input
-							onChange={this.updateLastName}
+							onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -112,7 +120,7 @@ class TeacherRegisterForm extends Component {
 						]
 					})(
 						<Input
-                            onChange={this.updateTeacherId}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -134,7 +142,7 @@ class TeacherRegisterForm extends Component {
 						]
 					})(
 						<Input
-							onChange={this.updateEmail}
+							onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -156,7 +164,7 @@ class TeacherRegisterForm extends Component {
 						]
 					})(
 						<Input
-							onChange={this.updatePassword}
+							onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -198,7 +206,7 @@ class TeacherRegisterForm extends Component {
 	}
 }
 
-const WrappedTeacherRegisterForm = Form.create({ name: "teacher_register_form" })(
+const WrappedTeacherRegisterForm = Form.create({ name: formName })(
 	TeacherRegisterForm
 );
 

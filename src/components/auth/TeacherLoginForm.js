@@ -4,23 +4,31 @@ import { Form, Icon, Input, Button, Checkbox } from "antd";
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 
+const formName = 'teacher_login_form';
+
 class TeacherLoginForm extends Component {
 	state = {
 		email: "",
 		password: ""
 	};
 
-	updateEmail = (e) => {
-        this.setState({
-            'email': e.target.value            
-        })
-    }
+	handleChange = (e) => {
+		this.setState({
+			[e.target.id.replace(formName+'_', '')]: e.target.value
+		})
+	}
 
-    updatePassword = (e) => {
-        this.setState({
-            'password': e.target.value
-        })
-    }
+	// updateEmail = (e) => {
+    //     this.setState({
+    //         'email': e.target.value            
+    //     })
+    // }
+
+    // updatePassword = (e) => {
+    //     this.setState({
+    //         'password': e.target.value
+    //     })
+    // }
 
 	handleSubmit = (e) => {
 		e.preventDefault();
@@ -37,17 +45,17 @@ class TeacherLoginForm extends Component {
 		return (
 			<Form onSubmit={this.handleSubmit} className="teacher-login-form">
 				<Form.Item>
-					{getFieldDecorator("studentId", {
+					{getFieldDecorator("email", {
 						rules: [
 							{
 								required: true,
-								message: "Please input your username!"
+								message: "Please input your email!"
 							}
 						]
 					})(
 						<Input 
                             id="email"
-                            onChange={this.updateEmail}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -55,7 +63,7 @@ class TeacherLoginForm extends Component {
 									style={{ color: "rgba(0,0,0,.25)" }}
 								/>
 							}
-							placeholder="Username"
+							placeholder="Email"
 						/>
 					)}
 				</Form.Item>
@@ -70,7 +78,7 @@ class TeacherLoginForm extends Component {
 					})(
 						<Input
                             id="password"
-                            onChange={this.updatePassword}
+                            onChange={this.handleChange}
 							className="custom-padding-left"
 							prefix={
 								<Icon
@@ -121,7 +129,7 @@ class TeacherLoginForm extends Component {
 	}
 }
 
-const WrappedTeacherLoginForm = Form.create({ name: "teacher_login_form" })(
+const WrappedTeacherLoginForm = Form.create({ name: formName })(
 	TeacherLoginForm
 );
 
