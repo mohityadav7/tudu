@@ -9,7 +9,7 @@ const TabPane = Tabs.TabPane;
 const CourseHome = (props) => {
     
     return (
-        <div style={{ padding: '24px' }}>
+        <div style={{ padding: '16px' }}>
             <Tabs defaultActiveKey="1">
                 <TabPane tab="Announcements" key="1">
                     <AnnouncementList announcements={props.announcements} />

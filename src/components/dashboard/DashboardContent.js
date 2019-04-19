@@ -36,7 +36,7 @@ class DashboardContent extends React.Component {
                                  }}>Announcements</h3>
                                 <AnnouncementList announcements={this.props.announcements} />
                                 <h3>Courses</h3>
-                                <CoursesList announcements={this.props.announcements} />
+                                <CoursesList courses={this.props.btechItCourses} />
                             </div>
                         </Col>
                         <Col xs={24} sm={8} md={8} lg={8} xl={8} >

@@ -1,13 +1,18 @@
 import React from 'react';
+import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 import './CourseCard.css';
 
-const Course = ({announcement}) => {
+const Course = ({course}) => {
     return (
-        <Link to={`/dashboard/courses/${announcement.id}`}>
-            <div className="course-card-body">
-                <b>{ announcement.title.substring(0,40) }</b>
-            </div>
+        <Link to={`/dashboard/courses/it/${course.code}`}>
+            <Card 
+                size="small"
+                title={ course.short + ' (' + course.code + '}' }
+                style={{ }}
+            >
+                <p>{ course.title }</p>
+            </Card>
         </Link>
     )
 }

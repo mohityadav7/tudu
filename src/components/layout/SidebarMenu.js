@@ -8,8 +8,10 @@ const SubMenu = Menu.SubMenu;
 
 const SidebarMenu = (props) => {
 
+	const { courses } = props;
+
 	let href = window.location.href.split('/');
-	href = href[href.length-1]
+	href = href[href.length-1];
 
 	return (
 		<Menu
@@ -34,12 +36,16 @@ const SidebarMenu = (props) => {
 				</NavLink>
 			</Menu.Item> */}
 			<SubMenu key="courses" title={<span><Icon type="book" /><span>Courses</span></span>}>
-				<Menu.Item key="1"><Link to={`/dashboard/courses/${'1'}`}>Cloud Computing</Link></Menu.Item>
-				<Menu.Item key="2"><Link to={`/dashboard/courses/${'2'}`}>ACST</Link></Menu.Item>
-				<Menu.Item key="3"><Link to={`/dashboard/courses/${'3'}`}>Network Security</Link></Menu.Item>
-				<Menu.Item key="4"><Link to={`/dashboard/courses/${'4'}`}>AIES</Link></Menu.Item>
-				<Menu.Item key="5"><Link to={`/dashboard/courses/${'5'}`}>DSP</Link></Menu.Item>
-				<Menu.Item key="6"><Link to={`/dashboard/courses/${'6'}`}>Software Engineering</Link></Menu.Item>
+				{	
+					courses ?
+					courses[0]['sem6'].map(course => {
+						return (
+							<Menu.Item key={course.code}><Link to={`/dashboard/courses/it/${course.code}`}>{course.short}</Link></Menu.Item>
+						)
+					}) : (
+							<Menu.Item key="loading">Loading...</Menu.Item>
+					)
+				}
 			</SubMenu>
 			<Menu.Item key="settings">
 				<NavLink to={`/dashboard/settings`}>

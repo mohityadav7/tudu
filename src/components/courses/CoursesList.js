@@ -5,16 +5,16 @@ import './CourseList.css'
 
 const CoursesList = (props) => {
 
-    const { announcements } = props;
+    const { courses } = props;
 
     return (
         <div className="courses-list section">
             <Row>
-                { announcements && announcements.map(announcement => {
+                { courses && courses[0]['sem6'].map(course => {
                     return (
-                        <Col className="gutter-row" xs={12} sm={8} md={8} lg={4} xl={4} xxl={4} key={announcement.id}>
+                        <Col className="gutter-row" xs={12} sm={8} md={8} lg={4} xl={4} xxl={4} key={course.code}>
                             <div className="gutter-box">
-                                <CourseCard announcement={announcement} />
+                                <CourseCard course={course} />
                             </div>
                         </Col>
                     )

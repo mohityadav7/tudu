@@ -68,7 +68,7 @@ class MainLayout extends Component {
 				>
 					<div>
 						<SidebarProfileCard />
-						<SidebarMenu match={match} />
+						<SidebarMenu match={match} courses={this.props.btechItCourses} />
 					</div>
 				</Sider> {/* Sider -for desktop site */}
 				
@@ -89,13 +89,13 @@ class MainLayout extends Component {
 					<Content>
 						<div className="App" style={{  }}>
 							<Switch>
-								<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} />} />
+								<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} btechItCourses={this.props.btechItCourses} />} />
 								<Route exact path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
 								<Route exact path='/dashboard/settings' component={SettingsContent} />
 								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
 								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial/>} />
 								<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
-								<Route exact path='/dashboard/courses/:id' render={() => <CourseHome announcements={this.props.announcements}/>} />
+								<Route exact path='/dashboard/courses/it/:code' render={() => <CourseHome announcements={this.props.announcements}/>} />
 							</Switch>
 						</div>
 					</Content>
@@ -111,12 +111,13 @@ const mapStateToProps = (state) => {
 	console.log(state)
 	return{
 		announcements: state.firestore.ordered.announcements,
+		btechItCourses: state.firestore.ordered['btech-it-courses'],
 		auth: state.firebase.auth,
 		profile: state.firebase.profile
 	}
 }
 
 export default compose(
-	firestoreConnect([{collection: 'announcements', limit: 10, orderBy: ['createdAt', 'desc']}]),
+	firestoreConnect([{collection: 'announcements', limit: 10, orderBy: ['createdAt', 'desc']}, {collection: 'btech-it-courses'}]),
 	connect(mapStateToProps)
 )(withRouter(MainLayout));
