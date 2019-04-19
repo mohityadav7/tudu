@@ -16,15 +16,19 @@ const Announcement = (props) => {
         }
 
         return (
-            <Card 
-                size="small"
-                title={ announcement.title }
-                style={{ width: '100%', margin: '12px 0' }}
-            >
-                <p>{ announcement.description }</p>
-                <p className="grey-text">Posted by { announcement.authorFirstName + ' ' + announcement.authorLastName } <br/>
-                { moment(announcement.createdAt.toDate()).calendar() } </p>
-            </Card>
+            <div style={{ margin: '16px' }}>
+                <Card 
+                    size="small"
+                    title={ announcement.title }
+                    style={{ width: '100%', margin: '12px 0' }}
+                >
+                    <p>{ announcement.description }</p>
+                    <div style={{ padding: '8px', backgroundColor: '#f5f5f5' }}>
+                    <p style={{ color: '#999' }}>Posted by { announcement.authorFirstName + ' ' + announcement.authorLastName } <br/>
+                    { moment(announcement.createdAt.toDate()).calendar() } </p>
+                    </div>
+                </Card>
+            </div>
         )
     } else {
         return (

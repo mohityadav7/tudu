@@ -1,7 +1,8 @@
-import firebase from '../../config/firebaseConfig';
+// import firebase from '../../config/firebaseConfig';
 
 export const signIn = (credentials) => {
     return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
         firebase.auth().signInWithEmailAndPassword(
             credentials.email,
             credentials.password
@@ -14,7 +15,8 @@ export const signIn = (credentials) => {
 }
 
 export const signOut = () => {
-    return (dispatch, getState) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();        
         firebase.auth().signOut().then(() => {
             dispatch({ type: 'SIGNOUT_SUCCESS' })
         }).catch((err) => {
@@ -24,9 +26,10 @@ export const signOut = () => {
 }
 
 export const signUp = (newUser) => {
-    return (dispatch, getState, { getFirestore }) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = getFirestore();
-
+        const firebase = getFirebase();
+        
         firebase.auth().createUserWithEmailAndPassword(
             newUser.email,
             newUser.password
@@ -47,6 +50,8 @@ export const signUp = (newUser) => {
 
 export const sendVerificationCodeForPhoneSignIn = ({ phone, appVerifier }) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase();
+
         firebase.auth().signInWithPhoneNumber(phone, appVerifier)
             .then(confirmationResult => {
                 dispatch({ type: 'CODE_SENT_SUCCESS' });

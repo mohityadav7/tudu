@@ -33,7 +33,12 @@ export class NewAnnouncement extends Component {
 
 	render() {
 		return (
-			<Fragment>
+			<div style={{
+                backgroundColor: '#ffffff',
+                padding: 16,
+                margin: 16,
+                border: '1px solid #e8e8e8'
+            }}>
 				<h3>Make new Announcement</h3>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Item>
@@ -46,7 +51,7 @@ export class NewAnnouncement extends Component {
 						<Button type="primary" htmlType="submit">Make Announcement</Button> 
 					</Form.Item>
 				</Form>
-			</Fragment>
+			</div>
 		)
 	}
 }

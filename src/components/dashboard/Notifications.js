@@ -11,7 +11,7 @@ const notifications = [
 
 const Notifications = () => {
     return (
-        <div style={{ 'margin': '24px', 'boxSizing': 'border-box' }}>
+        <div>
             <Card
               size="small"
               title="Notifications"

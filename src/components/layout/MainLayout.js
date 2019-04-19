@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, Switch } from 'react-router-dom';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import "./MainLayout.css";
@@ -16,8 +16,9 @@ import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import SidebarProfileCard from './SidebarProfileCard';
 import NewAnnouncement from "../announcements/NewAnnouncement";
+import NewStudyMaterial from "../studyMaterial/NewStudyMaterial";
 import Announcement from "../announcements/Announcement";
-import Course from "../courses/Course";
+import CourseHome from "../courses/CourseHome";
 
 import { Drawer, Layout } from 'antd';
 import 'antd/dist/antd.css';
@@ -87,14 +88,17 @@ class MainLayout extends Component {
 					<LayoutHeader showDrawer={this.showDrawer} /> {/* header for mobile site */}
 					
 					<Content>
-						<div className="App" style={{ padding: '24px' }}>
-							<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} />} />
-							<Route exact path='/dashboard/course/:id' component={CourseDetails} />
-							<Route path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
-							<Route exact path='/dashboard/settings' component={SettingsContent} />
-							<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
-							<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
-							<Route exact path='/dashboard/courses/:id' render={() => <Course announcements={this.props.announcements}/>} />
+						<div className="App" style={{  }}>
+							<Switch>
+								<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} />} />
+								<Route exact path='/dashboard/course/:id' component={CourseDetails} />
+								<Route exact path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
+								<Route exact path='/dashboard/settings' component={SettingsContent} />
+								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
+								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial/>} />
+								<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
+								<Route exact path='/dashboard/courses/:id' render={() => <CourseHome announcements={this.props.announcements}/>} />
+							</Switch>
 						</div>
 					</Content>
 

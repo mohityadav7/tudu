@@ -6,9 +6,14 @@ import AnnouncementSummary from './AnnouncementSummary'
 const AnnouncementList = (props) => {
 
     const { announcements } = props;
+    const style={
+        padding: '20px',
+        border: '1px solid #e8e8e8',
+        backgroundColor: '#ffffff',
+    }
 
     return (
-        <div className="courses-list section">
+        <div style={style}>
             <Link to='/dashboard/newAnnouncement'>
                 <Button><Icon type="plus" /> Create New Announcement</Button>
             </Link>
