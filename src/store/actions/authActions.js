@@ -38,7 +38,10 @@ export const signUp = (newUser) => {
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
                 initials: newUser.firstName[0] + newUser.lastName[0],
-                isTeacher: newUser.isTeacher
+                isTeacher: newUser.isTeacher,
+                program: newUser.program,
+                branch: newUser.branch,
+                semester: newUser.semester
             })
         }).then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' })

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Icon, Input, Button, Select } from "antd";
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
 
 const formName = 'student_register_form';
-
+const Option = Select.Option;
 class StudentRegisterForm extends Component {
     state = {
 		firstName: "",
@@ -14,9 +14,9 @@ class StudentRegisterForm extends Component {
 		email: "",
 		password: "",
 		isTeacher: false,
-		program: "BTech",
-		branch: "",
-		semester: 0
+		program: null,
+		branch: null,
+		semester: null
 	};
 	
 	handleChange = (e) => {
@@ -59,7 +59,14 @@ class StudentRegisterForm extends Component {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
-                this.props.signUp(this.state);
+				this.setState({
+					...values
+				},
+					() => {
+						console.log(this.state);
+						this.props.signUp(this.state);
+					}
+				)
 			}
 		});
     };
@@ -156,6 +163,76 @@ class StudentRegisterForm extends Component {
 							}
 							placeholder="Email"
 						/>
+					)}
+				</Form.Item>
+				<Form.Item>
+					{getFieldDecorator("program", {
+						rules: [
+							{
+								required: true,
+								message: "Please select a program!"
+							}
+						]
+					})(
+						<Select
+							onSelect={this.handleSelect}
+                            showSearch
+                            style={{ width: '100%' }}
+                            placeholder="Program"
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        >
+                            <Option value="BTech">BTech</Option>
+                        </Select>
+					)}
+				</Form.Item>
+				<Form.Item>
+					{getFieldDecorator("branch", {
+						rules: [
+							{
+								required: true,
+								message: "Please select a branch!"
+							}
+						]
+					})(
+						<Select
+							onSelect={this.handleSelect}
+                            showSearch
+                            style={{ width: '100%' }}
+                            placeholder="Branch"
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        >
+                            <Option value="it">Information Technology</Option>
+                        </Select>
+					)}
+				</Form.Item>
+				<Form.Item>
+					{getFieldDecorator("semester", {
+						rules: [
+							{
+								required: true,
+								message: "Please select a semester!"
+							}
+						]
+					})(
+						<Select
+							onSelect={this.handleSelect}
+                            showSearch
+                            style={{ width: '100%' }}
+                            placeholder="Semester"
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        >
+                            <Option value="1">1</Option>
+                            <Option value="2">2</Option>
+                            <Option value="3">3</Option>
+                            <Option value="4">4</Option>
+                            <Option value="5">5</Option>
+                            <Option value="6">6</Option>
+                            <Option value="7">7</Option>
+                            <Option value="8">8</Option>
+                        </Select>
 					)}
 				</Form.Item>
 				<Form.Item>
