@@ -8,7 +8,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 const AnnouncementList = (props) => {
 
-    const { courseAnnouncements } = props;
+    const { courseAnnouncements, isTeacher } = props;
     const style={
         padding: '20px',
         border: '1px solid #e8e8e8',
@@ -17,20 +17,30 @@ const AnnouncementList = (props) => {
 
     return (
         <div style={style}>
-            <Link to='/dashboard/newAnnouncement'>
-                <Button><Icon type="plus" /> Create New Announcement</Button>
-            </Link>
-            { courseAnnouncements && courseAnnouncements.length > 0 ? 
-                (courseAnnouncements[0].hasOwnProperty('announcements') ? 
-                    (courseAnnouncements[0].announcements.map((announcement, index) => {
-                        return (
-                            <Link to={ '/dashboard/announcements/'+announcement.id } key={index}>
-                                <AnnouncementSummary announcement={announcement} />
-                            </Link>
-                        )
-                    })) :
-                    <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }}>No announcements yet.</Card>                    
-                ):
+            {/* show create new announcement button if user is a teacher */}
+            {isTeacher ? 
+                <Link to='/dashboard/newAnnouncement'>
+                    <Button><Icon type="plus" /> Create New Announcement</Button>
+                </Link>
+                : null
+            }
+            {/* if courseAnnouncements exist */}
+            { courseAnnouncements ? (
+                // if courseAnnouncements is empty
+                courseAnnouncements.length === 0 ? (
+                    <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }}>
+                        No announcements yet
+                    </Card>
+                ) :
+                // else if announcements are present
+                courseAnnouncements.map((announcement, index) => {
+                    return (
+                        <Link to={ '/dashboard/announcements/'+announcement.id } key={index}>
+                            <AnnouncementSummary announcement={announcement} />
+                        </Link>
+                    )
+                }))
+                :
                 <div>
                     <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }} loading={true}></Card>
                     <Card style={{ width: '100%', marginTop: 16, marginBottom: 16 }} loading={true}></Card>
@@ -47,15 +57,35 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default compose(
-    firestoreConnect(props => [{
+const firestoreConnectQueriesConfig = props => {
+    let out = [{
         collection: 'announcements',
         doc: 'it',
         subcollections: [{
-            collection: 'sem6',
-            doc: props.course
+            collection: 'sem6'
         }],
-        storeAs: 'courseAnnouncements'
-    }]),
+        storeAs: 'oldCourseAnnouncements'
+    }];
+
+    if(props.course){
+        out.push({
+            collection: 'announcements',
+            doc: 'it',
+            subcollections: [{
+                collection: 'sem6',
+                doc: props.course,
+                subcollections: [{
+                    collection: 'announcements'
+                }]
+            }],
+            storeAs: 'courseAnnouncements'
+        })
+    }
+
+    return out;
+}
+
+export default compose(
+    firestoreConnect(firestoreConnectQueriesConfig),
     connect(mapStateToProps)
 )(AnnouncementList);

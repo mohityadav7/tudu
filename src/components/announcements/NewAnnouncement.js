@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Input, Button, Form } from 'antd';
 import { createAnnouncement } from '../../store/actions/announcementActions';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 const { TextArea } = Input;
 
@@ -32,6 +32,11 @@ export class NewAnnouncement extends Component {
 	}
 
 	render() {
+
+		if(!this.props.isTeacher) {
+			return <Redirect to="/dashboard">You are not allowed to add announcements.</Redirect>
+		}
+
 		return (
 			<div style={{
                 backgroundColor: '#ffffff',

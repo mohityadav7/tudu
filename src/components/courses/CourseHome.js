@@ -12,7 +12,7 @@ const CourseHome = (props) => {
         <div style={{ padding: '16px' }}>
             <Tabs defaultActiveKey="1">
                 <TabPane tab="Announcements" key="1">
-                    <AnnouncementList course={props.course} announcements={props.announcements} />
+                    <AnnouncementList isTeacher={props.isTeacher} course={props.course} announcements={props.announcements} />
                 </TabPane>
                 <TabPane tab="Study Material" key="2">
                     <StudyMaterialList course={props.course} />

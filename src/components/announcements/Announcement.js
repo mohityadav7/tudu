@@ -5,16 +5,9 @@ import moment from 'moment';
 
 const Announcement = (props) => {
     const id = props.match.params.id;
-    const { announcements } = props;
+    const { announcement } = props;
     
-    if(announcements){
-        let announcement = null;
-        for (var i=0; i < (announcements ? announcements.length : 0); i++) {
-            if (announcements[i].id === id) {
-                announcement = announcements[i];
-            }
-        }
-
+    if(announcement){
         return (
             <div style={{ margin: '16px' }}>
                 <Card 

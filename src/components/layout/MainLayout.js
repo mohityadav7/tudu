@@ -60,6 +60,7 @@ class MainLayout extends Component {
 	render() {
 		const match = this.props.match;
 		const auth = this.props.auth;
+		const profile = this.props.profile;
 		
 		if(!auth.uid) {
 			return <Redirect to="/auth/login"></Redirect>
@@ -102,13 +103,13 @@ class MainLayout extends Component {
 					<Content>
 						<div className="App" style={{  }}>
 							<Switch>
-								<Route exact path='/dashboard' render={() => <DashboardContent announcements={this.props.announcements} btechItCourses={this.props.btechItCourses} />} />
+								<Route exact path='/dashboard' render={() => <DashboardContent isTeacher={profile.isTeacher} course={this.state.course} announcements={this.props.announcements} btechItCourses={this.props.btechItCourses} />} />
 								<Route exact path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
 								<Route exact path='/dashboard/settings' component={SettingsContent} />
-								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
-								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial/>} />
+								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement isTeacher={profile.isTeacher} />} />
+								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial isTeacher={profile.isTeacher} />} />
 								<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
-								<Route exact course={this.state.course} path='/dashboard/courses/it/:code' render={() => <CourseHome course={this.state.course} announcements={this.props.announcements}/>} />
+								<Route exact course={this.state.course} path='/dashboard/courses/it/:code' render={() => <CourseHome isTeacher={profile.isTeacher} course={this.state.course} announcements={this.props.announcements}/>} />
 							</Switch>
 						</div>
 					</Content>
