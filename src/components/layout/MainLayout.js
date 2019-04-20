@@ -26,7 +26,18 @@ import 'ant-design-pro/dist/ant-design-pro.min.css';
 const { Sider, Content } = Layout;
 
 class MainLayout extends Component {
-    state = { visible: false, placement: 'left' };
+    state = { 
+		visible: false,
+		placement: 'left',
+		course: null
+	};
+
+	setCourse = (course) => {
+		console.log('course changed to ', course);
+		this.setState({
+			course: course
+		})
+	}
     
     showDrawer = () => {
         this.setState({
@@ -68,7 +79,8 @@ class MainLayout extends Component {
 				>
 					<div>
 						<SidebarProfileCard />
-						<SidebarMenu match={match} courses={this.props.btechItCourses} />
+						{/* passing match in sidebar menu is necessary to show the correct active menu item */}
+						<SidebarMenu setCourse={this.setCourse} match={match} courses={this.props.btechItCourses} />
 					</div>
 				</Sider> {/* Sider -for desktop site */}
 				
@@ -80,7 +92,8 @@ class MainLayout extends Component {
 					onClose={this.onClose}
 					visible={this.state.visible}
 				>
-					<SidebarMenu hideDrawer={this.hideDrawer} />
+					{/* passing match in sidebar menu is necessary to show the correct active menu item */}
+					<SidebarMenu setCourse={this.setCourse} match={match} courses={this.props.btechItCourses} hideDrawer={this.hideDrawer} />
 				</Drawer> {/* /Drawer - for mobile site */}
 
 				<Layout>
@@ -95,7 +108,7 @@ class MainLayout extends Component {
 								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement/>} />
 								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial/>} />
 								<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
-								<Route exact path='/dashboard/courses/it/:code' render={() => <CourseHome announcements={this.props.announcements}/>} />
+								<Route exact course={this.state.course} path='/dashboard/courses/it/:code' render={() => <CourseHome course={this.state.course} announcements={this.props.announcements}/>} />
 							</Switch>
 						</div>
 					</Content>
