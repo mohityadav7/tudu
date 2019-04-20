@@ -22,13 +22,16 @@ export class NewAnnouncement extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.createAnnouncement({
-			...this.state,
-			authorFirstName: this.props.profile.firstName,
-			authorLastName: this.props.profile.lastName,
-			authorId: this.props.auth.uid,
-			createdAt: new Date()
+			announcement: {
+				...this.state,
+				authorFirstName: this.props.profile.firstName,
+				authorLastName: this.props.profile.lastName,
+				authorId: this.props.auth.uid,
+				createdAt: new Date()
+			},
+			courseCode: this.props.course
 		});
-		this.props.history.push('/dashboard')
+		this.props.history.push(`/dashboard/courses/it/${this.props.course}`)
 	}
 
 	render() {

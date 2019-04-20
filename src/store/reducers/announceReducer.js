@@ -13,7 +13,7 @@ const announcementReducer = (state = initState, action) => {
             console.log('created announcement', action.announcement);
             return state;
         case 'CREATE_ANNOUNCEMENT_ERR':
-            console.log('CREATE_ANNOUNCEMENT_ERR');
+            console.log('CREATE_ANNOUNCEMENT_ERR', action.err);
             return state;
         default:
             return state;

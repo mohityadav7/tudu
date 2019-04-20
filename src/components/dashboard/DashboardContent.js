@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import CoursesList from '../courses/CoursesList';
-import AnnouncementList from '../announcements/AnnouncementList';
+import CombinedAnnouncementList from '../announcements/CombinedAnnouncementList';
 import Notifications from './Notifications';
 import CustomPageHeader from '../layout/CustomPageHeader';
 
@@ -34,7 +34,7 @@ class DashboardContent extends React.Component {
                                     borderRight: '1px solid #e8e8e8',
                                     marginBottom: 0
                                  }}>Announcements</h3>
-                                <AnnouncementList isTeacher={this.props.isTeacher} announcements={this.props.announcements} />
+                                <CombinedAnnouncementList isTeacher={this.props.isTeacher} announcements={this.props.announcements} />
                                 <h3 style={{ 
                                     padding: '16px',
                                     backgroundColor: '#ffffff',

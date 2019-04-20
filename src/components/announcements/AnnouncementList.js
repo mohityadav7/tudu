@@ -10,7 +10,7 @@ const AnnouncementList = (props) => {
 
     const { courseAnnouncements, isTeacher, course } = props;
     const style={
-        padding: '20px',
+        padding: '16px',
         border: '1px solid #e8e8e8',
         backgroundColor: '#ffffff',
     }
@@ -78,6 +78,7 @@ const firestoreConnectQueriesConfig = props => {
                     collection: 'announcements'
                 }]
             }],
+            orderBy: ['createdAt', 'desc'],
             storeAs: 'courseAnnouncements'
         })
     }

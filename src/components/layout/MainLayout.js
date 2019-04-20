@@ -105,7 +105,7 @@ class MainLayout extends Component {
 								<Route exact path='/dashboard' render={() => <DashboardContent isTeacher={profile.isTeacher} course={this.state.course} announcements={this.props.announcements} btechItCourses={this.props.btechItCourses} />} />
 								<Route exact path='/dashboard/courses' render={() => <CoursesList announcements={this.props.announcements} />} />
 								<Route exact path='/dashboard/settings' component={SettingsContent} />
-								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement isTeacher={profile.isTeacher} />} />
+								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement course={this.state.course} isTeacher={profile.isTeacher} />} />
 								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial isTeacher={profile.isTeacher} />} />
 								<Route exact path='/dashboard/announcements/:course/:id' render={(props) => <Announcement {...props} announcements={this.props.announcements}/>} />
 								<Route exact course={this.state.course} path='/dashboard/courses/it/:code' render={(props) => <CourseHome {...props} isTeacher={profile.isTeacher} course={this.state.course} announcements={this.props.announcements}/>} />
