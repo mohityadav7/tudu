@@ -58,7 +58,6 @@ class MainLayout extends Component {
 	};
     
 	render() {
-		const match = this.props.match;
 		const auth = this.props.auth;
 		const profile = this.props.profile;
 		
@@ -81,7 +80,7 @@ class MainLayout extends Component {
 					<div>
 						<SidebarProfileCard />
 						{/* passing match in sidebar menu is necessary to show the correct active menu item */}
-						<SidebarMenu setCourse={this.setCourse} match={match} courses={this.props.btechItCourses} />
+						<SidebarMenu setCourse={this.setCourse} courses={this.props.btechItCourses} />
 					</div>
 				</Sider> {/* Sider -for desktop site */}
 				
@@ -94,7 +93,7 @@ class MainLayout extends Component {
 					visible={this.state.visible}
 				>
 					{/* passing match in sidebar menu is necessary to show the correct active menu item */}
-					<SidebarMenu setCourse={this.setCourse} match={match} courses={this.props.btechItCourses} hideDrawer={this.hideDrawer} />
+					<SidebarMenu setCourse={this.setCourse} courses={this.props.btechItCourses} hideDrawer={this.hideDrawer} />
 				</Drawer> {/* /Drawer - for mobile site */}
 
 				<Layout>
@@ -108,8 +107,8 @@ class MainLayout extends Component {
 								<Route exact path='/dashboard/settings' component={SettingsContent} />
 								<Route exact path='/dashboard/newAnnouncement' render={() => <NewAnnouncement isTeacher={profile.isTeacher} />} />
 								<Route exact path='/dashboard/newStudyMaterial' render={() => <NewStudyMaterial isTeacher={profile.isTeacher} />} />
-								<Route exact path='/dashboard/announcements/:id' render={() => <Announcement announcements={this.props.announcements}/>} />
-								<Route exact course={this.state.course} path='/dashboard/courses/it/:code' render={() => <CourseHome isTeacher={profile.isTeacher} course={this.state.course} announcements={this.props.announcements}/>} />
+								<Route exact path='/dashboard/announcements/:course/:id' render={(props) => <Announcement {...props} announcements={this.props.announcements}/>} />
+								<Route exact course={this.state.course} path='/dashboard/courses/it/:code' render={(props) => <CourseHome {...props} isTeacher={profile.isTeacher} course={this.state.course} announcements={this.props.announcements}/>} />
 							</Switch>
 						</div>
 					</Content>

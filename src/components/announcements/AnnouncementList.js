@@ -8,7 +8,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 const AnnouncementList = (props) => {
 
-    const { courseAnnouncements, isTeacher } = props;
+    const { courseAnnouncements, isTeacher, course } = props;
     const style={
         padding: '20px',
         border: '1px solid #e8e8e8',
@@ -35,7 +35,7 @@ const AnnouncementList = (props) => {
                 // else if announcements are present
                 courseAnnouncements.map((announcement, index) => {
                     return (
-                        <Link to={ '/dashboard/announcements/'+announcement.id } key={index}>
+                        <Link to={ `/dashboard/announcements/${course}/${announcement.id}` } key={index}>
                             <AnnouncementSummary announcement={announcement} />
                         </Link>
                     )

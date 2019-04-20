@@ -8,7 +8,7 @@ const Course = ({course}) => {
         <Link to={`/dashboard/courses/it/${course.code}`}>
             <Card 
                 size="small"
-                title={ course.short + ' (' + course.code + '}' }
+                title={ course.short + ' (' + course.code + ')' }
                 style={{ }}
             >
                 <p>{ course.title }</p>

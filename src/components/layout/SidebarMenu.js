@@ -8,34 +8,45 @@ const SubMenu = Menu.SubMenu;
 
 class SidebarMenu extends Component{
 
+	state = {
+		selectedKeys: ['dashboard']
+	}
+
 	componentDidMount() {
 		// set course when page is opened for the first time, useful if course link is opened and not changed from sidebar
 		let href = window.location.href.split('/');
 		href = href[href.length-1];
 		this.props.setCourse(href);
+		this.setState({
+			selectedKeys: [href]
+		})
+	}
+
+	updateCourseAndSelectedKeys = () => {
+		// set course when page is opened for the first time, useful if course link is opened and not changed from sidebar
+		let href = window.location.href.split('/');
+		href = href[href.length-1];
+		this.props.setCourse(href);
+		this.setState({
+			selectedKeys: [href]
+		})
 	}
 	
-
 	render() {
-
 		// to show courses in sidebar menu
 		const { courses } = this.props;
 		
 		// get last string after last '/' in url
 		let href = window.location.href.split('/');
 		href = href[href.length-1];
-		
-		// update course on change in menu item
-		const updateCourse = ({key}) => {
-			this.props.setCourse(key);
-		}
+		console.log(href);
 	
 		return (
 			<Menu
 				theme="light"
 				mode="inline"
 				defaultSelectedKeys={["dashboard"]}
-				selectedKeys={[href]}
+				selectedKeys={this.state.selectedKeys}
 				style={{ padding: "0 0" }}
 				onClick={this.props.hideDrawer}
 				defaultOpenKeys={["courses"]}
@@ -57,7 +68,7 @@ class SidebarMenu extends Component{
 						courses ?
 						courses[0]['sem6'].map(course => {
 							return (
-								<Menu.Item onClick={updateCourse} key={course.code}><Link to={`/dashboard/courses/it/${course.code}`}>{course.short}</Link></Menu.Item>
+								<Menu.Item onClick={this.updateCourseAndSelectedKeys} key={course.code}><Link to={`/dashboard/courses/it/${course.code}`}>{course.short}</Link></Menu.Item>
 							)
 						}) : (
 								<Menu.Item key="loading">Loading...</Menu.Item>

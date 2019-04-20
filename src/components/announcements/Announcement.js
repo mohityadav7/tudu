@@ -2,12 +2,15 @@ import React from 'react';
 import { Card } from 'antd';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 const Announcement = (props) => {
-    const id = props.match.params.id;
-    const { announcement } = props;
+    let { announcement } = props;
     
     if(announcement){
+        announcement = announcement[0];
         return (
             <div style={{ margin: '16px' }}>
                 <Card 
@@ -30,4 +33,37 @@ const Announcement = (props) => {
     }
 }
 
-export default withRouter(Announcement);
+const mapStateToProps = (state) => {
+    return {
+        announcement: state.firestore.ordered.announcement
+    }
+}
+
+const firestoreConnectQueriesConfig = (props) => {
+    const id = props.match.params.id;
+    const course = props.match.params.course;
+
+    console.log('course', course);
+    console.log('id', id);
+
+    let out = [{
+        collection: 'announcements',
+        doc: 'it',
+        subcollections: [{
+            collection: 'sem6',
+            doc: course,
+            subcollections: [{
+                collection: 'announcements',
+                doc: id
+            }]
+        }],
+        storeAs: 'announcement'
+    }]
+
+    return out;
+}
+
+export default compose(
+    firestoreConnect(firestoreConnectQueriesConfig),
+    connect(mapStateToProps)
+)(withRouter(Announcement));
