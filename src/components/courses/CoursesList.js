@@ -6,9 +6,14 @@ import './CourseList.css'
 const CoursesList = (props) => {
 
     const { courses } = props;
+    const style={
+        padding: '20px 14px',
+        border: '1px solid #e8e8e8',
+        backgroundColor: '#ffffff',
+    }
 
     return (
-        <div className="courses-list section">
+        <div style={style} className="courses-list section">
             <Row>
                 { courses && courses[0]['sem6'].map(course => {
                     return (

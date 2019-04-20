@@ -31,6 +31,15 @@ class SidebarMenu extends Component{
 			selectedKeys: [href]
 		})
 	}
+
+	updateSelectedKeys = () => {
+		// set course when page is opened for the first time, useful if course link is opened and not changed from sidebar
+		let href = window.location.href.split('/');
+		href = href[href.length-1];
+		this.setState({
+			selectedKeys: [href]
+		})
+	}
 	
 	render() {
 		// to show courses in sidebar menu
@@ -51,7 +60,7 @@ class SidebarMenu extends Component{
 				onClick={this.props.hideDrawer}
 				defaultOpenKeys={["courses"]}
 			>
-				<Menu.Item key="dashboard">
+				<Menu.Item onClick={this.updateSelectedKeys} key="dashboard">
 					<NavLink to={`/dashboard`}>
 						<Icon type="home" />
 						<span className="nav-text">Dashboard</span>
@@ -75,7 +84,7 @@ class SidebarMenu extends Component{
 						)
 					}
 				</SubMenu>
-				<Menu.Item key="settings">
+				<Menu.Item onClick={this.updateSelectedKeys} key="settings">
 					<NavLink to={`/dashboard/settings`}>
 						<Icon type="setting" />
 						<span className="nav-text">Settings</span>

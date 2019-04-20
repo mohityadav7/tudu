@@ -35,7 +35,15 @@ class DashboardContent extends React.Component {
                                     marginBottom: 0
                                  }}>Announcements</h3>
                                 <AnnouncementList isTeacher={this.props.isTeacher} announcements={this.props.announcements} />
-                                <h3>Courses</h3>
+                                <h3 style={{ 
+                                    padding: '16px',
+                                    backgroundColor: '#ffffff',
+                                    borderTop: '1px solid #e8e8e8',
+                                    borderLeft: '1px solid #e8e8e8',
+                                    borderRight: '1px solid #e8e8e8',
+                                    marginBottom: 0,
+                                    marginTop: 12
+                                 }}>Courses</h3>
                                 <CoursesList courses={this.props.btechItCourses} />
                             </div>
                         </Col>
