@@ -8,21 +8,22 @@ import { compose } from 'redux'
 
 const StudyMaterialList = (props) => {
 
-    // const { announcements } = props;
     const style={
         padding: '20px',
         border: '1px solid #e8e8e8',
         backgroundColor: '#ffffff',
     }
 
-    console.log('study material props:',props);
+    const { isTeacher, material } = props;
 
     return (
         <div style={style}>
-            <Link to='/dashboard/newStudyMaterial'>
+            { isTeacher ?
+                <Link to='/dashboard/newStudyMaterial'>
                 <Button><Icon type="plus" />Add Study Material</Button>
             </Link>
-            { props.material ? props.material.map(item => {
+            : null }
+            { material ? material.map(item => {
                 return (
                     <a href={ item.downloadURL } key={item.id}>
                         <StudyMaterial item={item} />

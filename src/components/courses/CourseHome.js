@@ -15,7 +15,7 @@ const CourseHome = (props) => {
                     <AnnouncementList isTeacher={props.isTeacher} course={props.course} announcements={props.announcements} />
                 </TabPane>
                 <TabPane tab="Study Material" key="2">
-                    <StudyMaterialList course={props.course} />
+                    <StudyMaterialList isTeacher={props.isTeacher} course={props.course} />
                 </TabPane>
                 <TabPane tab="Assignments" key="3">Assignments (TODO)</TabPane>
                 <TabPane tab="Others" key="4">Others (TODO)</TabPane>

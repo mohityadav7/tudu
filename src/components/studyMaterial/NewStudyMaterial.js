@@ -3,7 +3,7 @@ import { Upload, Button, Icon, Progress } from "antd";
 // import reqwest from "reqwest";
 import { connect } from 'react-redux';
 import { uploadFile } from '../../store/actions/studyMaterialActions';
-// import ProgressBar from './ProgressBar';
+import { Redirect } from 'react-router-dom';
 
 class NewStudyMaterial extends React.Component {
 	state = {
@@ -71,6 +71,14 @@ class NewStudyMaterial extends React.Component {
 			fileList: fileList.slice(fileList.length-1,fileList.length)
 		};
 
+		if(!this.props.auth.uid) {
+			return <Redirect to="/auth/login"></Redirect>
+		}
+
+		if(!this.props.isTeacher) {
+			return <Redirect to="/dashboard"></Redirect>
+		}
+
 		return (
 			<div style={{
                 backgroundColor: '#ffffff',
@@ -100,7 +108,9 @@ class NewStudyMaterial extends React.Component {
 const mapStateToProps = (state) => {
     return {
         uploading: state.studyMaterial.uploading,
-        percent: state.studyMaterial.progress
+		percent: state.studyMaterial.progress,
+		auth: state.firebase.auth,
+		profile: state.firebase.profile
     }
 }
 

@@ -33,8 +33,12 @@ export class NewAnnouncement extends Component {
 
 	render() {
 
+		if(!this.props.auth.uid) {
+			return <Redirect to="/auth/login"></Redirect>
+		}
+
 		if(!this.props.isTeacher) {
-			return <Redirect to="/dashboard">You are not allowed to add announcements.</Redirect>
+			return <Redirect to="/dashboard"></Redirect>
 		}
 
 		return (
