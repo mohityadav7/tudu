@@ -20,7 +20,6 @@ const LayoutHeader = (props) => {
                 </div> {/* /left header menu - for mobile site */}
                 {/* right header menu - for mobile site */}
                 <div style={{ float: 'right' }}>
-                    <Icon onClick={props.showDrawer} type="notification" style={{ padding: '22px 16px', fontSize: '20px' }} />
                     <NotificationMenu />
                 </div> {/* /right header menu - for mobile site */}
             </div>

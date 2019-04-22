@@ -34,15 +34,24 @@ export const signUp = (newUser) => {
             newUser.email,
             newUser.password
         ).then((resp) => {
-            return firestore.collection('users').doc(resp.user.uid).set({
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-                initials: newUser.firstName[0] + newUser.lastName[0],
-                isTeacher: newUser.isTeacher,
-                program: newUser.program,
-                branch: newUser.branch,
-                semester: newUser.semester
-            })
+            if(newUser.isTeacher){
+                return firestore.collection('users').doc(resp.user.uid).set({
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName,
+                    initials: newUser.firstName[0] + newUser.lastName[0],
+                    isTeacher: newUser.isTeacher
+                }) 
+            } else {
+                return firestore.collection('users').doc(resp.user.uid).set({
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName,
+                    initials: newUser.firstName[0] + newUser.lastName[0],
+                    isTeacher: newUser.isTeacher,
+                    program: newUser.program,
+                    branch: newUser.branch,
+                    semester: newUser.semester
+                })
+            }
         }).then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' })
         }).catch((err) => {

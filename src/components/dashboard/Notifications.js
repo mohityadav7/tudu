@@ -1,6 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Card, List } from 'antd';
+import './Notifications.css';
 
 const notifications = [
   { title: 'Hi, Welcome to tudu' },
@@ -11,7 +12,7 @@ const notifications = [
 
 const Notifications = () => {
     return (
-        <div>
+        <div className="notifications-container">
             <Card
               size="small"
               title="Notifications"

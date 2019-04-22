@@ -10,7 +10,7 @@ const SidebarProfileCard = (props) => {
       <div className="profile-card" style={{ display: 'block', padding: '24px' }} >
             <div className="profile-card-info-container" >
                 <Avatar size={64} icon="user" style={{ margin: 'auto', display: 'block' }} />
-                <span style={{ textAlign: 'center', 'display': 'block', paddingTop: '12px' }}>Hi, Mohit</span>
+                <span style={{ textAlign: 'center', 'display': 'block', paddingTop: '12px' }}>Hi, {props.profile.firstName}</span>
                 { props.profile.isTeacher ? (
                   <span style={{ textAlign: 'center', 'display': 'block', paddingTop: '12px' }}><Tag color="cyan">Teacher</Tag></span>
                 ) : null }

@@ -56,6 +56,7 @@ class TeacherRegisterForm extends Component {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
+				console.log('state before sign up:', this.state);
                 this.props.signUp(this.state);
 			}
 		});

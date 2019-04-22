@@ -17,7 +17,7 @@ const CoursesList = (props) => {
             <Row>
                 { courses && courses[0]['sem6'].map(course => {
                     return (
-                        <Col className="gutter-row" xs={12} sm={8} md={8} lg={4} xl={4} xxl={4} key={course.code}>
+                        <Col className="gutter-row" xs={24} sm={24} md={8} lg={4} xl={4} xxl={4} key={course.code}>
                             <div className="gutter-box">
                                 <CourseCard course={course} />
                             </div>

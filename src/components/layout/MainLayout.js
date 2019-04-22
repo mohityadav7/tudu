@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect, Switch } from 'react-router-dom';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { Tag } from 'antd';
 import "./MainLayout.css";
 
 // import Navbar from "../layout/Navbar";
@@ -86,7 +87,13 @@ class MainLayout extends Component {
 				
 				{/*  Drawer - for mobile site */}
 				<Drawer
-					title={`Hi, ${this.props.profile.firstName}!`}
+					title={ this.props.profile.isTeacher ? (
+							<div>
+								<div style={{ textAlign: 'center' }}>{`Hi, ${this.props.profile.firstName}!`}</div>
+								<div style={{ textAlign: 'center', 'display': 'block', paddingTop: '12px' }}><Tag color="cyan">Teacher</Tag></div>
+							</div>
+						) : <span>{`Hi, ${this.props.profile.firstName}!`}</span>
+					}
 					placement={this.state.placement}
 					closable={false}
 					onClose={this.onClose}

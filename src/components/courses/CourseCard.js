@@ -9,7 +9,7 @@ const Course = ({course}) => {
             <Card 
                 size="small"
                 title={ course.short + ' (' + course.code + ')' }
-                style={{ }}
+                style={{ marginTop: 12 }}
             >
                 <p>{ course.title }</p>
             </Card>
